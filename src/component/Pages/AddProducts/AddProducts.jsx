@@ -67,13 +67,14 @@ const AddProducts = () => {
                 className="flex bg-transparent w-full h-full focus:outline-none"
               >
                 <option disabled selected>
-                  Pick one
+                  Brand
                 </option>
-                <option>Star Wars</option>
-                <option>Harry Potter</option>
-                <option>Lord of the Rings</option>
-                <option>Planet of the Apes</option>
-                <option>Star Trek</option>
+                <option>Toyota</option>
+                <option>Honda</option>
+                <option>Ford</option>
+                <option>Chevrolet</option>
+                <option>BMW</option>
+                <option>Mercedes-Benz</option>
               </select>
             </div>
             <div className="bg-textColors h-10 flex rounded-lg md:w-2/4">

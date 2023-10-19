@@ -8,12 +8,12 @@
     {
       "id": 2,
       "name": "Honda",
-      "img": "https://example.com/honda.png"
+      "img": "https://i.ibb.co/55JJWvd/pngegg-1.png"
     },
     {
       "id": 3,
       "name": "Ford",
-      "img": "https://example.com/ford.png"
+      "img": "https://i.ibb.co/fpwYTph/Large-Ford-Car-Logo-Zero-To-60-Times.jpg"
     },
     {
       "id": 4,
@@ -28,7 +28,7 @@
     {
       "id": 6,
       "name": "Mercedes-Benz",
-      "img": "https://example.com/mercedes.png"
+      "img": "https://i.ibb.co/HHccn5y/1524250340-590-Mercedes-Benz-Logo-Wordmark-desktop.jpg"
     }
   ]
 }

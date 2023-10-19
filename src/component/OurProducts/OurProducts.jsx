@@ -6,8 +6,6 @@ const OurProducts = () => {
 
   const brandsData = data.car_brands;
 
-  console.log(brandsData);
-
   return (
     <div className="py-10 md:px-6 px-2">
       <h2 className="text-center text-textColors md:text-4xl text-xl font-extrabold">

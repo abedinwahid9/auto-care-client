@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const AddProducts = () => {
   const handleAddProducts = (e) => {
     e.preventDefault();
@@ -5,7 +7,7 @@ const AddProducts = () => {
 
     const photoUrl = form.photoUrl.value;
     const productName = form.ProductsName.value;
-    const brandName = form.brandName.value;
+    const typeName = form.typeName.value;
     const category = form.category.value;
     const price = form.price.value;
     const description = form.description.value;
@@ -14,7 +16,7 @@ const AddProducts = () => {
     const newProduct = {
       photoUrl,
       productName,
-      brandName,
+      typeName,
       category,
       price,
       description,
@@ -22,6 +24,21 @@ const AddProducts = () => {
     };
 
     console.log(newProduct);
+
+    fetch("http://localhost:5000/cars", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          Swal.fire("cars success add");
+          form.reset();
+        }
+      });
   };
 
   return (
@@ -36,6 +53,7 @@ const AddProducts = () => {
         <form onSubmit={handleAddProducts} className="space-y-5 ">
           <div className="bg-textColors w-full h-10 flex rounded-lg">
             <input
+              required
               className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
               type="text"
               name="photoUrl"
@@ -45,6 +63,7 @@ const AddProducts = () => {
           <div className="flex  md:flex-row flex-col gap-5">
             <div className="bg-textColors h-10 flex rounded-lg flex-grow">
               <input
+                required
                 className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
                 type="text"
                 name="ProductsName"
@@ -53,10 +72,11 @@ const AddProducts = () => {
             </div>
             <div className="bg-textColors h-10 flex rounded-lg flex-grow">
               <input
+                required
                 className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
                 type="text"
-                name="brandName"
-                placeholder="Brand Name "
+                name="typeName"
+                placeholder="Type Name "
               />
             </div>
           </div>
@@ -79,6 +99,7 @@ const AddProducts = () => {
             </div>
             <div className="bg-textColors h-10 flex rounded-lg md:w-2/4">
               <input
+                required
                 className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
                 type="number"
                 name="price"
@@ -98,6 +119,7 @@ const AddProducts = () => {
           <div className="bg-textColors w-1/5 h-10 flex rounded-lg flex items-center justify-between p-3 gap-4">
             <label>Rating: </label>
             <input
+              required
               className="w-full text-center bg-transparent focus:outline-none"
               type="number"
               min="1"

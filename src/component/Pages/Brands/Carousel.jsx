@@ -5,7 +5,7 @@ const Carousel = () => {
         <div className="carousel w-full h-full">
           <div id="slide1" className="carousel-item relative w-full">
             <img
-              src="https://i.ibb.co/CMSyxwd/Auto-Company-Ad-Banner-Design-1024x576.jpg"
+              src="https://i.ibb.co/qmTj7V5/Rent-a-Car-Professional-Web-Banner-Design-1024x576.jpg"
               className="w-full"
             />
             <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">

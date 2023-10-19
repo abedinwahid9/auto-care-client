@@ -8,6 +8,7 @@ import AddProducts from "./component/Pages/AddProducts/AddProducts.jsx";
 import Login from "./component/Pages/Login/Login.jsx";
 import Brands from "./component/Pages/Brands/Brands.jsx";
 import SignUp from "./component/SignUp/SignUp.jsx";
+import ViewDetails from "./component/Pages/ViewDetails/ViewDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,12 @@ const router = createBrowserRouter([
         element: <SignUp></SignUp>,
       },
       {
-        path: "/:id",
+        path: "/cars/:category",
         element: <Brands></Brands>,
+      },
+      {
+        path: "/cars/category/:id",
+        element: <ViewDetails></ViewDetails>,
       },
     ],
   },

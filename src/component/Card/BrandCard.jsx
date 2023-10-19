@@ -2,10 +2,10 @@
 import { Link } from "react-router-dom";
 
 const BrandCard = ({ item }) => {
-  const { id, name, img } = item;
+  const { name, img } = item;
 
   return (
-    <Link to={`/${id}`}>
+    <Link to={`/cars/${name}`}>
       <div
         className="card h-72  shadow-xl image-full bg-contain bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${img})` }}

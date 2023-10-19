@@ -1,0 +1,34 @@
+{
+  "car_brands": [
+    {
+      "id": 1,
+      "name": "Toyota",
+      "img": "https://i.ibb.co/DQMHCVN/emblem-001.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Honda",
+      "img": "https://example.com/honda.png"
+    },
+    {
+      "id": 3,
+      "name": "Ford",
+      "img": "https://example.com/ford.png"
+    },
+    {
+      "id": 4,
+      "name": "Chevrolet",
+      "img": "https://i.ibb.co/cx6F6xq/Chevrolet-Logo.png"
+    },
+    {
+      "id": 5,
+      "name": "BMW",
+      "img": "https://i.ibb.co/M5mQywH/1997-BMW-logo-640x480.webp"
+    },
+    {
+      "id": 6,
+      "name": "Mercedes-Benz",
+      "img": "https://example.com/mercedes.png"
+    }
+  ]
+}

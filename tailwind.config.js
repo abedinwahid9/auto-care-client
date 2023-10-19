@@ -2,7 +2,16 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        text: "0 0 5px rgba(0, 0, 0, 0.5)",
+      },
+    },
+    colors: {
+      btnColors: "#008080",
+      textColors: "#888",
+      primaryColors: "#111111",
+    },
   },
   plugins: [require("daisyui")],
 };

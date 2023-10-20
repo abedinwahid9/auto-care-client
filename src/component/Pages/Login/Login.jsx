@@ -1,7 +1,29 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import { useContext } from "react";
+import { AuthProvider } from "../../../AuthContext/AuthContext";
 
 const Login = () => {
+  const { signInUser } = useContext(AuthProvider);
+
+  const navigate = useNavigate();
+
+  const handleLoginForm = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    signInUser(email, password)
+      .then((result) => {
+        e.target.reset();
+        console.log(result);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div
       className="min-h-screen w-full bg-cover bg-center bg-no-repeat flex items-center justify-center"
@@ -12,11 +34,12 @@ const Login = () => {
           Login Here
         </h2>
         <div className="divider"></div>
-        <form className="w-3/4 space-y-5 ">
+        <form onSubmit={handleLoginForm} className="w-3/4 space-y-5 ">
           <div className="bg-textColors h-12 flex rounded-lg">
             <input
               className="w-full bg-transparent placeholder-primaryColors focus:outline-none p-4 text-base-200"
               type="email"
+              name="email"
               placeholder="Enter Your Email"
               required
             />
@@ -25,6 +48,7 @@ const Login = () => {
             <input
               className="w-full bg-transparent placeholder-primaryColors focus:outline-none p-4 text-base-200"
               type="password"
+              name="password"
               placeholder="Enter Your Password"
               required
             />

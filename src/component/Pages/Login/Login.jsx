@@ -2,9 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useContext } from "react";
 import { AuthProvider } from "../../../AuthContext/AuthContext";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
-  const { signInUser } = useContext(AuthProvider);
+  const provider = new GoogleAuthProvider();
+  const { signInUser, googleLogin } = useContext(AuthProvider);
 
   const navigate = useNavigate();
 
@@ -21,6 +23,16 @@ const Login = () => {
       })
       .catch((error) => {
         console.error(error);
+      });
+  };
+  const handlegoogleLogin = () => {
+    googleLogin(provider)
+      .then(() => {
+        console.log("success");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -69,7 +81,7 @@ const Login = () => {
           <h2 className="text-textColors text-lg font-medium  mr-4">
             Signup with:
           </h2>
-          <div>
+          <div onClick={handlegoogleLogin}>
             <FcGoogle className="text-6xl" />
           </div>
         </div>

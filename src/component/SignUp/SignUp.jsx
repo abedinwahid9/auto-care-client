@@ -3,14 +3,16 @@ import { FcGoogle } from "react-icons/fc";
 import { useContext, useState } from "react";
 import { AuthProvider } from "../../AuthContext/AuthContext";
 import { updateProfile } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const SignUp = () => {
+  const provider = new GoogleAuthProvider();
   const Auth = useContext(AuthProvider);
 
   const navgivate = useNavigate();
   const [passwordError, setPasswordError] = useState("");
 
-  const { createUser, loading } = Auth;
+  const { createUser, loading, googleLogin } = Auth;
 
   const isPasswordValid = (password) => {
     if (password.length < 6) return false;
@@ -55,6 +57,16 @@ const SignUp = () => {
       })
       .catch((err) => {
         console.error(err);
+      });
+  };
+  const handlegoogleLogin = () => {
+    googleLogin(provider)
+      .then(() => {
+        console.log("success");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -124,7 +136,7 @@ const SignUp = () => {
           <h2 className="text-textColors text-lg font-medium  mr-4">
             Signup with:
           </h2>
-          <div>
+          <div onClick={handlegoogleLogin}>
             <FcGoogle className="text-6xl" />
           </div>
         </div>

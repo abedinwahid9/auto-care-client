@@ -9,7 +9,9 @@ const Brands = () => {
   const catoegorys = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/cars/${catoegorys.category}`)
+    fetch(
+      `https://cars-server-cxudsoge0-abedinwahid9.vercel.app/cars/${catoegorys.category}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setCars(data);

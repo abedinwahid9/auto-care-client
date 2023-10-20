@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
 const CarsCard = (car) => {
-  const { photoUrl, productName, typeName, category, rating, price } = car.car;
+  const { _id, photoUrl, productName, typeName, category, rating, price } =
+    car.car;
 
   console.log(car);
   return (
@@ -18,7 +19,7 @@ const CarsCard = (car) => {
       </div>
       <div className=" flex ">
         <div className="w-2/4">
-          <Link to="/cars/category/:id">
+          <Link to={`/cars/category/${_id}`}>
             <button className="hover:bg-textColors text-primaryColors font-bold w-full bg-btnColors h-12 ">
               View details
             </button>

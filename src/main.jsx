@@ -9,15 +9,19 @@ import Login from "./component/Pages/Login/Login.jsx";
 import Brands from "./component/Pages/Brands/Brands.jsx";
 import SignUp from "./component/SignUp/SignUp.jsx";
 import ViewDetails from "./component/Pages/ViewDetails/ViewDetails.jsx";
+import Error from "./component/Pages/Error/Error.jsx";
+import AuthContext from "./AuthContext/AuthContext.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
         element: <Home></Home>,
+
         loader: () => fetch("brands.json"),
       },
       {
@@ -50,6 +54,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthContext>
+      <RouterProvider router={router} />
+    </AuthContext>
   </React.StrictMode>
 );

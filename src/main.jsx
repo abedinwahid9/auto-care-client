@@ -10,7 +10,10 @@ import Brands from "./component/Pages/Brands/Brands.jsx";
 import SignUp from "./component/SignUp/SignUp.jsx";
 import ViewDetails from "./component/Pages/ViewDetails/ViewDetails.jsx";
 import Error from "./component/Pages/Error/Error.jsx";
+
+import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import AuthContext from "./AuthContext/AuthContext.jsx";
+import LoginRoute from "./component/PrivateRoute/LoginRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,19 +29,31 @@ const router = createBrowserRouter([
       },
       {
         path: "/addproducts",
-        element: <AddProducts></AddProducts>,
+        element: (
+          <PrivateRoute>
+            <AddProducts></AddProducts>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/mycart",
-        element: <AddProducts></AddProducts>,
+        element: <myCart></myCart>,
       },
       {
         path: "/login",
-        element: <Login></Login>,
+        element: (
+          <LoginRoute>
+            <Login></Login>
+          </LoginRoute>
+        ),
       },
       {
         path: "/signup",
-        element: <SignUp></SignUp>,
+        element: (
+          <LoginRoute>
+            <SignUp></SignUp>
+          </LoginRoute>
+        ),
       },
       {
         path: "/cars/:category",
@@ -46,7 +61,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/cars/category/:id",
-        element: <ViewDetails></ViewDetails>,
+        element: (
+          <PrivateRoute>
+            <ViewDetails></ViewDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },

@@ -30,7 +30,7 @@ const ViewDetails = () => {
   };
   const handleCart = () => {
     console.log(cartData);
-    fetch("http://localhost:5000/cars/cart", {
+    fetch("https://cars-server-cm7hjjrkh-abedinwahid9.vercel.app/cars/cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

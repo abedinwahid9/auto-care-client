@@ -1,20 +1,33 @@
 /* eslint-disable react/prop-types */
+import Swal from "sweetalert2";
 const MycartCard = (car) => {
   const { _id, photoUrl, productName, typeName, category, rating, price } =
     car.car;
 
   const handleDeletebtn = (id) => {
-    var content = confirm("are you delete ?");
-    if (content === true) {
-      console.log(id);
-      fetch(`http://localhost:5000/mycart/${id}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `https://cars-server-cm7hjjrkh-abedinwahid9.vercel.app/mycart/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
 
   return (

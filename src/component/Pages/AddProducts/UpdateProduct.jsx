@@ -11,7 +11,7 @@ const UpdateProducts = () => {
 
   useEffect(() => {
     fetch(
-      `https://cars-server-had06hfdt-abedinwahid9.vercel.app/cars/category/${params.id}`
+      `https://cars-server-cm7hjjrkh-abedinwahid9.vercel.app/cars/category/${params.id}`
     )
       .then((res) => res.json())
       .then((data) => {

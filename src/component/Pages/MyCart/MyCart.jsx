@@ -9,7 +9,9 @@ const MyCart = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/cars/cart/email/${user.email}`)
+    fetch(
+      `https://cars-server-cm7hjjrkh-abedinwahid9.vercel.app/cars/cart/email/${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(true);

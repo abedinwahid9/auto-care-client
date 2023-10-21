@@ -138,7 +138,7 @@ const UpdateProducts = () => {
               placeholder="short descripiton"
             ></textarea>
           </div>
-          <div className="bg-textColors w-1/5 h-10 flex rounded-lg flex items-center justify-between p-3 gap-4">
+          <div className="bg-textColors w-1/5 h-10 rounded-lg flex items-center justify-between p-3 gap-4">
             <label>Rating: </label>
             <input
               required

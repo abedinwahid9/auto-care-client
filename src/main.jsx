@@ -10,11 +10,11 @@ import Brands from "./component/Pages/Brands/Brands.jsx";
 import SignUp from "./component/SignUp/SignUp.jsx";
 import ViewDetails from "./component/Pages/ViewDetails/ViewDetails.jsx";
 import Error from "./component/Pages/Error/Error.jsx";
-
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import AuthContext from "./AuthContext/AuthContext.jsx";
 import LoginRoute from "./component/PrivateRoute/LoginRoute.jsx";
 import UpdateProducts from "./component/Pages/AddProducts/UpdateProduct.jsx";
+import MyCart from "./component/Pages/MyCart/MyCart.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/mycart",
-        element: <myCart></myCart>,
+        element: <MyCart></MyCart>,
       },
       {
         path: "/login",

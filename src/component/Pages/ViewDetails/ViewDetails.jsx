@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AuthProvider } from "../../../AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const ViewDetails = () => {
   const [data, setDatas] = useState([]);
   const [isLoading, setisLoading] = useState(true);
   const id = useParams();
-
+  const { user } = useContext(AuthProvider);
+  console.log(user.email);
   const {
     photoUrl,
     productName,
@@ -15,6 +18,38 @@ const ViewDetails = () => {
     price,
     description,
   } = data;
+  const cartData = {
+    email: user.email,
+    photoUrl: data.photoUrl,
+    productName: data.productName,
+    typeName: data.typeName,
+    category: data.category,
+    rating: data.rating,
+    price: data.price,
+    description: data.descriptionL,
+  };
+  const handleCart = () => {
+    console.log(cartData);
+    fetch("http://localhost:5000/cars/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cartData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          Swal.fire("cars add cart ");
+        }
+      })
+      .catch((error) => {
+        if (error.message == "Failed to fetch") {
+          Swal.fire("this item already add");
+        }
+      });
+  };
 
   useEffect(() => {
     fetch(
@@ -43,7 +78,10 @@ const ViewDetails = () => {
                 }}
               >
                 <div className="bg-[#0b0b0b80] w-full py-7 pl-7">
-                  <button className="bg-btnColors md:px-5 md:py-3 px-4 py-2 text-[#fff] font-semibold  rounded">
+                  <button
+                    onClick={handleCart}
+                    className="bg-btnColors md:px-5 md:py-3 px-4 py-2 text-[#fff] font-semibold  rounded"
+                  >
                     Add To Cart
                   </button>
                 </div>

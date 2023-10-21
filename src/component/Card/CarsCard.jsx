@@ -4,7 +4,6 @@ const CarsCard = (car) => {
   const { _id, photoUrl, productName, typeName, category, rating, price } =
     car.car;
 
-  console.log(car);
   return (
     <div className="overflow-hidden  h-full card  glass justify-between">
       <figure className="h-2/4">
@@ -27,7 +26,7 @@ const CarsCard = (car) => {
         </div>
 
         <div className="w-2/4">
-          <Link to="/cars/category/:id">
+          <Link to={`/cars/update/${_id}`}>
             <button className="hover:bg-textColors text-primaryColors font-bold w-full bg-btnColors h-12">
               Update
             </button>

@@ -1,14 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useContext } from "react";
+import { useContext, useState } from "react"; // Import useState
 import { AuthProvider } from "../../../AuthContext/AuthContext";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
   const provider = new GoogleAuthProvider();
   const { signInUser, googleLogin } = useContext(AuthProvider);
-
   const navigate = useNavigate();
+
+  // Add state for error message
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleLoginForm = (e) => {
     e.preventDefault();
@@ -22,9 +24,12 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error.message);
+
+        setErrorMessage("Incorrect password. Please try again.");
       });
   };
+
   const handlegoogleLogin = () => {
     googleLogin(provider)
       .then(() => {
@@ -33,6 +38,8 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
+        // Set the error message here
+        setErrorMessage("Google Login Failed");
       });
   };
 
@@ -65,14 +72,17 @@ const Login = () => {
               required
             />
           </div>
+          {errorMessage && (
+            <p className="text-[#ff3030] text-sm font-bold">{errorMessage}</p>
+          )}
           <input
             className="btn bg-btnColors border-none text-[white] w-full text-base font-medium"
             type="submit"
-            value="login"
+            value="Login"
           />
         </form>
         <h2 className="text-textColors text-lg font-medium mt-5">
-          Create an New Account?{" "}
+          Create a New Account?{" "}
           <Link to="/signup" className="text-btnColors underline">
             Signup
           </Link>

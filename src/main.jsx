@@ -14,6 +14,7 @@ import Error from "./component/Pages/Error/Error.jsx";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute.jsx";
 import AuthContext from "./AuthContext/AuthContext.jsx";
 import LoginRoute from "./component/PrivateRoute/LoginRoute.jsx";
+import UpdateProducts from "./component/Pages/AddProducts/UpdateProduct.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
 
-        loader: () => fetch("brands.json"),
+        loader: () => fetch("/brands.json"),
       },
       {
         path: "/addproducts",
@@ -64,6 +65,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ViewDetails></ViewDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/cars/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProducts></UpdateProducts>
           </PrivateRoute>
         ),
       },

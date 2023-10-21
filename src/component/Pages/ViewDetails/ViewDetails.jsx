@@ -18,10 +18,11 @@ const ViewDetails = () => {
 
   useEffect(() => {
     fetch(
-      `https://cars-server-cxudsoge0-abedinwahid9.vercel.app/cars/category/${id.id}`
+      `https://cars-server-had06hfdt-abedinwahid9.vercel.app/cars/category/${id.id}`
     )
       .then((res) => res.json())
       .then((data) => {
+        setisLoading(true);
         setDatas(data);
         setisLoading(false);
       });
@@ -31,7 +32,8 @@ const ViewDetails = () => {
     <>
       {!isLoading && (
           <span className="loading loading-spinner loading-lg"></span>
-        ) && (
+        ) &&
+        data && (
           <div>
             <div className="lg:h-[650px] md:h-[400px] h-[200px] rounded-lg overflow-hidden">
               <div

@@ -1,6 +1,26 @@
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const AddProducts = () => {
+const UpdateProducts = () => {
+  const [cardata, setCardata] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch(
+      `https://cars-server-had06hfdt-abedinwahid9.vercel.app/cars/category/${params.id}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setIsLoading(true);
+        setCardata(data);
+        setIsLoading(false);
+      });
+  }, [params.id]);
+
   const handleAddProducts = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,10 +43,8 @@ const AddProducts = () => {
       rating,
     };
 
-    console.log(newProduct);
-
-    fetch("https://cars-server-had06hfdt-abedinwahid9.vercel.app/cars", {
-      method: "POST",
+    fetch(`http://localhost:5000/cars/update/${params.id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -35,8 +53,8 @@ const AddProducts = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          Swal.fire("cars add success ");
-          form.reset();
+          Swal.fire("cars update success ");
+          navigate(`/cars/category/${params.id}`);
         }
       });
   };
@@ -48,7 +66,7 @@ const AddProducts = () => {
     >
       <div className="w-3/4">
         <h2 className="text-center text-textColors md:text-4xl text-xl font-extrabold mb-8">
-          Add products
+          Update products : {cardata.productName}
         </h2>
         <form onSubmit={handleAddProducts} className="space-y-5 ">
           <div className="bg-textColors w-full h-10 flex rounded-lg">
@@ -57,6 +75,7 @@ const AddProducts = () => {
               className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
               type="text"
               name="photoUrl"
+              defaultValue={cardata.photoUrl}
               placeholder=" Photo Url"
             />
           </div>
@@ -67,6 +86,7 @@ const AddProducts = () => {
                 className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
                 type="text"
                 name="ProductsName"
+                defaultValue={cardata.productName}
                 placeholder=" Products Name"
               />
             </div>
@@ -76,6 +96,7 @@ const AddProducts = () => {
                 className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
                 type="text"
                 name="typeName"
+                defaultValue={cardata.typeName}
                 placeholder="Type Name "
               />
             </div>
@@ -83,7 +104,7 @@ const AddProducts = () => {
           <div className="flex  md:flex-row flex-col gap-5">
             <div className="md:w-2/4 h-10 bg-textColors rounded-lg p-3">
               <select
-                defaultValue={"Brand"}
+                defaultValue={cardata.typeName}
                 name="category"
                 className="flex bg-transparent w-full h-full focus:outline-none"
               >
@@ -102,6 +123,7 @@ const AddProducts = () => {
                 className="p-3 bg-transparent w-full focus:outline-none placeholder-primaryColors "
                 type="number"
                 name="price"
+                defaultValue={cardata.price}
                 placeholder="Products Price"
               />
             </div>
@@ -112,6 +134,7 @@ const AddProducts = () => {
               name="description"
               cols="100"
               rows="6"
+              defaultValue={cardata.description}
               placeholder="short descripiton"
             ></textarea>
           </div>
@@ -125,7 +148,7 @@ const AddProducts = () => {
               max="5"
               name="rating"
               placeholder="rating"
-              defaultValue={1}
+              defaultValue={cardata.rating}
             />
           </div>
           <input
@@ -139,4 +162,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default UpdateProducts;

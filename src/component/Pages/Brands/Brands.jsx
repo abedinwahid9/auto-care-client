@@ -10,14 +10,15 @@ const Brands = () => {
 
   useEffect(() => {
     fetch(
-      `https://cars-server-cxudsoge0-abedinwahid9.vercel.app/cars/${catoegorys.category}`
+      `https://cars-server-had06hfdt-abedinwahid9.vercel.app/cars/${catoegorys.category}`
     )
       .then((res) => res.json())
       .then((data) => {
+        setIsLoading(true);
         setCars(data);
         setIsLoading(false);
       });
-  }, []);
+  }, [catoegorys.category]);
 
   return (
     <div>
@@ -31,6 +32,7 @@ const Brands = () => {
           {!isLoading && (
             <span className="loading loading-spinner loading-lg"></span>
           ) &&
+          cars &&
           cars.length === 0 ? (
             <h2 className="font-bold text-2xl">Data not found</h2>
           ) : (

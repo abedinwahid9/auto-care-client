@@ -8,7 +8,7 @@ const ViewDetails = () => {
   const [isLoading, setisLoading] = useState(true);
   const id = useParams();
   const { user } = useContext(AuthProvider);
-  console.log(user.email);
+
   const {
     photoUrl,
     productName,

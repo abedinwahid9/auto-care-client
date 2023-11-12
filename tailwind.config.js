@@ -6,6 +6,7 @@ export default {
       boxShadow: {
         text: "0 0 5px rgba(0, 0, 0, 0.5)",
       },
+      darkMode: "class",
     },
     colors: {
       btnColors: "#008080",

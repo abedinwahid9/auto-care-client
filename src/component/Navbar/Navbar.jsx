@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { AuthProvider } from "../../AuthContext/AuthContext";
+import DarkMoodtoggle from "../DarkMood/DarkMoodtoggle";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthProvider);
@@ -16,6 +17,7 @@ const Navbar = () => {
       <NavLink className="mr-4 text-lg font-bold " to="/">
         Home
       </NavLink>
+
       <NavLink className="mr-4 text-lg font-bold " to="/addproducts">
         Add Product
       </NavLink>
@@ -72,8 +74,9 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 text-textColors ">{links}</ul>
       </div>
       <div className="navbar-end">
+        <DarkMoodtoggle></DarkMoodtoggle>
         {user && (
-          <div className="dropdown dropdown-end">
+          <div className="ml-4 dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img src={user.photoURL} />

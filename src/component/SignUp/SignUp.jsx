@@ -9,7 +9,7 @@ const SignUp = () => {
   const provider = new GoogleAuthProvider();
   const Auth = useContext(AuthProvider);
 
-  const navgivate = useNavigate();
+  const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState("");
 
   const { createUser, loading, googleLogin } = Auth;
@@ -52,7 +52,7 @@ const SignUp = () => {
             // Handle errors
             console.error("Error updating display name", error);
           });
-        navgivate("/");
+        navigate("/");
         loading(false);
       })
       .catch((err) => {

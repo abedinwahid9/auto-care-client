@@ -9,6 +9,8 @@ const UpdateProducts = () => {
   const params = useParams();
   const navigate = useNavigate();
 
+  console.log();
+
   useEffect(() => {
     fetch(
       `https://cars-server-cm7hjjrkh-abedinwahid9.vercel.app/cars/category/${params.id}`
@@ -20,6 +22,11 @@ const UpdateProducts = () => {
         setIsLoading(false);
       });
   }, [params.id]);
+
+  const handleSelectOption = (e) => {
+    const newCategory = e.target.value;
+    setCardata({ ...cardata, category: newCategory });
+  };
 
   const handleAddProducts = (e) => {
     e.preventDefault();
@@ -43,13 +50,16 @@ const UpdateProducts = () => {
       rating,
     };
 
-    fetch(`http://localhost:5000/cars/update/${params.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newProduct),
-    })
+    fetch(
+      `https://cars-server-cm7hjjrkh-abedinwahid9.vercel.app/cars/update/${params.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
@@ -104,17 +114,20 @@ const UpdateProducts = () => {
           <div className="flex  md:flex-row flex-col gap-5">
             <div className="md:w-2/4 h-10 bg-textColors rounded-lg p-3">
               <select
-                defaultValue={cardata.typeName}
+                value={cardata.category}
+                onChange={(e) => {
+                  handleSelectOption();
+                }}
                 name="category"
                 className="flex bg-transparent w-full h-full focus:outline-none"
               >
                 <option disabled>Brand</option>
-                <option>Toyota</option>
-                <option>Honda</option>
-                <option>Ford</option>
-                <option>Chevrolet</option>
-                <option>BMW</option>
-                <option>Mercedes-Benz</option>
+                <option value="Toyota"> Toyota</option>
+                <option value="Honda">Honda</option>
+                <option value="Ford">Ford</option>
+                <option value="Chevrolet">Chevrolet</option>
+                <option value="BMW">BMW</option>
+                <option value="Mercedes-Benz">Mercedes-Benz</option>
               </select>
             </div>
             <div className="bg-textColors h-10 flex rounded-lg md:w-2/4">

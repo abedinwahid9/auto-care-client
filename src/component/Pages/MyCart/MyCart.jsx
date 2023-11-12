@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import MycartCard from "../../Card/MycartCard";
 import { AuthProvider } from "../../../AuthContext/AuthContext";
+import Swal from "sweetalert2";
 // /cars/cart/email/:email
 
 const MyCart = () => {
@@ -18,7 +19,38 @@ const MyCart = () => {
         setCars(data);
         setIsLoading(false);
       });
-  }, [user.email]);
+  }, [user.email, cars]);
+
+  const handleDeletebtn = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(
+          `https://cars-server-cm7hjjrkh-abedinwahid9.vercel.app/mycart/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              const updateData = cars.filter((car) => {
+                car.id !== id;
+              });
+              setCars(updateData);
+            }
+          });
+      }
+    });
+  };
 
   return (
     user && (
@@ -36,7 +68,13 @@ const MyCart = () => {
             <h2 className="font-bold text-2xl">Data not found</h2>
           ) : (
             cars?.map((car) => {
-              return <MycartCard key={car._id} car={car}></MycartCard>;
+              return (
+                <MycartCard
+                  key={car._id}
+                  car={car}
+                  handleDeletebtn={handleDeletebtn}
+                ></MycartCard>
+              );
             })
           )}
         </div>
